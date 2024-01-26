@@ -4,5 +4,5 @@ Ejercicio de practica en java hecho entre Ignacio Delgado, Sebastian Manrique, J
 Juego en el que nos pida cuantos m2 queremos el mapa que serian 2 arrays (eje x, y) y que se nos genere la interfaz de usuario de moverte, etc... 
 una vez preguntado esto que se nos genere un mapa de (-) y de forma aleatoria (*), un metodo que calcule el medio y que ponga una "c"
 que al movernos.
-&nbsp&nbsp
+<br
 ![PacmanJava](https://github.com/IgnacioDrako/Demo-Rouge/assets/37903095/e0ec98ab-b4e1-464b-a4bc-3fae00255710)
