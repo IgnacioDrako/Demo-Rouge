@@ -1,60 +1,34 @@
-package Demo;
-import java.util.Scanner;
-public class Mein {
-    static Scanner sc = new Scanner(System.in);
-    static int vectorX = 2; // Posición inicial del jugador
-    static int vectorY = 2;
-    static char skin = 'C'; // Carácter que representa al jugador
-    public static void main(String[] args) {
-        char[][] rectangulo = Mapa(); // Obtener el mapa
-        do {
-            jugador(rectangulo, vectorX, vectorY, skin); // Añadir al jugador al mapa
-            imprimirMapa(rectangulo); // Imprimir el mapa con el jugador
-            moverjugador();
-        } while (true);
-    }
-    public static char[][] Mapa() {
-        char[][] rectangulo = crearRectangulo(10, 20);
-        imprimirMapa(rectangulo);
-        return rectangulo;
-    }
-    private static char[][] crearRectangulo(int filas, int columnas) {
-        char[][] rectangulo = new char[filas][columnas];
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                rectangulo[i][j] = (i == 0 || i == filas - 1 || j == 0 || j == columnas - 1) ? '*' : ' ';
-            }
-        }
-        return rectangulo;
-    }
-    private static void imprimirMapa(char[][] rectangulo) {
-        for (int i = 0; i < rectangulo.length; i++) {
-            for (int j = 0; j < rectangulo[i].length; j++) {
-                System.out.print(rectangulo[i][j] + " ");
-            }
-            System.out.println(); // Salto de línea al final de cada fila
-        }
-    }
-    private static void jugador(char[][] rectangulo, int vectorX, int vectorY, char skin) {
-        rectangulo[vectorX][vectorY] = skin;
-    }
-    private static void moverjugador() {
-        System.out.println("Para moverse pulse w, a, s, d (arriba, izquierda, abajo, derecha)");
-        String input = sc.nextLine().toLowerCase(); // Convertir la entrada a minúsculas para simplificar la comparación
-        if (input.equals("w")) {
-            // Mover hacia arriba
-            vectorX--;
-        } else if (input.equals("a")) {
-            // Mover hacia la izquierda
-            vectorY--;
-        } else if (input.equals("s")) {
-            // Mover hacia abajo
-            vectorX++;
-        } else if (input.equals("d")) {
-            // Mover hacia la derecha
-            vectorY++;
-        } else {
-            System.out.println("Orden no reconocida, solo se admite w, a, s, d");
-        }
-    }
-}
+# Definimos las dimensiones de la cuadrícula
+filas = 10
+columnas = 20
+
+# Creamos la cuadrícula vacía
+cuadricula = [[' ' for _ in range(columnas)] for _ in range(filas)]
+
+# Función para cargar el mapa desde un archivo
+def cargar_mapa(archivo):
+    with open(archivo, 'r') as f:
+        for linea in f:
+            linea = linea.strip()  # Eliminar espacios en blanco y saltos de línea
+            if not linea:  # Si la línea está vacía, saltar
+                continue
+            try:
+                coordenadas, caracter = linea.split(',')  # Cambiamos a ',' como separador
+                fila, columna = map(int, coordenadas.split(','))  # Convertimos las coordenadas a enteros
+                if 0 <= fila < filas and 0 <= columna < columnas:
+                    cuadricula[fila][columna] = caracter
+                else:
+                    print(f"Coordenadas fuera de rango: {coordenadas}")  # Mensaje para coordenadas fuera de rango
+            except ValueError as e:
+                print(f"Error al procesar la línea: '{linea}'. Detalle del error: {e}")  # Mensaje de error para líneas no válidas
+
+# Función para imprimir la cuadrícula
+def imprimir_cuadricula(cuadricula):
+    for fila in cuadricula:
+        print(' '.join(fila))
+
+# Cargar el mapa desde el archivo
+cargar_mapa('mapa0.txt')
+
+# Imprimir la cuadrícula
+imprimir_cuadricula(cuadricula)
